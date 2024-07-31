@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const DummyAlumni = [
+  { company: 'Walmart', designation: 'Software Dvelopment Engineer' },
   { company: 'Deloitte', designation: 'Solution Delivery Analyst' },
   { company: 'HCL Software', designation: 'Product Manager' },
   { company: 'Oracle', designation: 'Software Development Engineer' },
