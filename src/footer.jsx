@@ -13,18 +13,6 @@ const fadeIn = keyframes`
   }
 `;
 
-const slideOut = keyframes`
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-`;
-
-// Define keyframes for sliding content animation
 const slideIn = keyframes`
   from {
     transform: translateX(-100%);
@@ -49,13 +37,15 @@ const FooterContainer = styled.footer`
   font-size: 16px;
   animation: ${fadeIn} 1s ease-in-out; /* Apply fadeIn animation */
   animation-delay: 0s; /* Fade-in starts immediately */
-  
-  @media (min-width: 768px) {
-    font-size: 18px; /* Increase font size for larger screens */
+
+  @media (max-width: 768px) {
+    font-size: 14px; /* Decrease font size for tablets and small screens */
+    padding: 15px;
   }
-  
-  @media (min-width: 1200px) {
-    font-size: 20px; /* Increase font size for very large screens */
+
+  @media (max-width: 480px) {
+    font-size: 12px; /* Further decrease font size for mobile screens */
+    padding: 10px;
   }
 `;
 
@@ -67,12 +57,12 @@ const AdditionalContent = styled.div`
   animation: ${slideIn} 10s ease-in-out; /* Slide-in animation with a duration of 10 seconds */
   overflow: hidden; /* Hide overflow to ensure smooth sliding effect */
   
-  @media (max-width: 767px) {
-    font-size: 14px; /* Reduce font size for small screens */
+  @media (max-width: 768px) {
+    font-size: 12px; /* Reduce font size for tablets */
   }
 
-  @media (min-width: 768px) {
-    font-size: 16px; /* Default font size for medium screens */
+  @media (max-width: 480px) {
+    font-size: 10px; /* Further reduce font size for mobile screens */
   }
 `;
 
@@ -104,12 +94,12 @@ const styles = {
     fontWeight: 'normal',
     color: 'lightblue', // Light blue for visibility
     fontFamily: 'Coneria',
-    padding: '10px',
+    padding: '5px', // Reduced padding for smaller screens
     transition: 'color 0.3s ease',
     display: 'inline-block',
   },
   logo: {
-    width: '150px',
+    width: '120px', // Adjusted width for better fit
     height: 'auto',
     marginBottom: '10px',
   },
