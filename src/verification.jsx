@@ -1,37 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-function Verification({ onVerify }) {
-  const [srns, setSrns] = useState('');
-
-  const handleVerification = () => {
-    if (srns.startsWith("PES") && srns.length === 13 && srns.includes("UG")) {
-      onVerify();
-    } else {
-      alert('Please provide a valid SRN');
-    }
-  };
-
-  return (
-    <PageContainer>
-      <VerificationContainer>
-        <Title>The first step is student verification. This is simply to verify and confirm that you are a student of PES University.</Title>
-        <Input
-          type="text"
-          placeholder="Enter your SRN (Case-sensitive)"
-          value={srns}
-          onChange={(e) => setSrns(e.target.value)}
-        />
-        <Button onClick={handleVerification}>Verify</Button>
-      </VerificationContainer>
-    </PageContainer>
-  );
-}
-
+// Define keyframes for fade-in and slide-out animations
 const fadeIn = keyframes`
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -39,81 +13,96 @@ const fadeIn = keyframes`
   }
 `;
 
-const PageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh; // Ensure it takes full viewport height
-  background: #f0f0f0; // Light background color for the full page
-  padding: 20px;
-  box-sizing: border-box;
+const slideIn = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 `;
 
-const VerificationContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(to right, #FF6F00, #003366);
+// Apply animations to the FooterContainer
+const FooterContainer = styled.footer`
+  text-align: center;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  animation: ${fadeIn} 4.5s ease-in-out;
+  background: linear-gradient(to right, #FF6F00, #003366); /* Gradient background from orange to blue */
+  border-top: 1px solid #ccc;
+  position: relative;
+  bottom: 0;
   width: 100%;
-  max-width: 600px; // Maximum width to keep it manageable
-  margin: 0 auto;
-  min-height: 300px; // Ensure a minimum height for proper spacing
-  box-sizing: border-box; // Include padding and border in the element's total width and height
+  font-weight: bold;
+  font-family: 'Coneria', sans-serif;
+  color: white; /* White text for contrast */
+  font-size: 16px;
+  animation: ${fadeIn} 1s ease-in-out; /* Apply fadeIn animation */
+  animation-delay: 0s; /* Fade-in starts immediately */
 
   @media (max-width: 768px) {
+    font-size: 14px; /* Decrease font size for tablets and small screens */
     padding: 15px;
   }
+
   @media (max-width: 480px) {
+    font-size: 12px; /* Further decrease font size for mobile screens */
     padding: 10px;
-    min-height: 250px;
   }
 `;
 
-const Title = styled.h2`
-  margin-bottom: 20px;
-  color: #ffffff;
-  font-size: 1.5rem;
-  text-align: center;
+// Apply the sliding animation to the additionalContent
+const AdditionalContent = styled.div`
+  margin-top: 20px;
+  font-weight: normal;
+  font-family: 'Coneria';
+  animation: ${slideIn} 10s ease-in-out; /* Slide-in animation with a duration of 10 seconds */
+  overflow: hidden; /* Hide overflow to ensure smooth sliding effect */
+  
+  @media (max-width: 768px) {
+    font-size: 12px; /* Reduce font size for tablets */
+  }
 
   @media (max-width: 480px) {
-    font-size: 1.25rem;
+    font-size: 10px; /* Further reduce font size for mobile screens */
   }
 `;
 
-const Input = styled.input`
-  margin-bottom: 20px;
-  padding: 10px;
-  width: 100%;
-  border: 2px solid #ddd;
-  border-radius: 5px;
-  font-size: 1rem;
-  transition: border-color 0.3s;
+const Footer = () => {
+  return (
+    <FooterContainer>
+      <img src="/logo-removebg-preview (1).png" alt="connectPES Logo" style={styles.logo} />
+      <p>&copy; {new Date().getFullYear()} connect. All rights reserved</p>
+      <AdditionalContent>
+        <div style={styles.links}>
+          <a href="https://contributorsconnectpes.netlify.app/" style={styles.link}>Contributors</a>
+          <a href="https://termsconnectpes.netlify.app/" style={styles.link}>Terms of use</a>
+          <a href="https://contactuspes.netlify.app/" style={styles.link}>Contact Us</a>
+        </div>
+        <p>connectPES: Your go-to platform to connect with alumni of PES University. Stay connected with your queries and concerns and stay in touch!</p>
+      </AdditionalContent>
+    </FooterContainer>
+  );
+};
 
-  &:focus {
-    border-color: #333;
-    outline: none;
-  }
-`;
+const styles = {
+  links: {
+    marginTop: '10px',
+    fontFamily: 'Coneria',
+  },
+  link: {
+    margin: '0 10px',
+    textDecoration: 'none',
+    fontWeight: 'normal',
+    color: 'lightblue', // Light blue for visibility
+    fontFamily: 'Coneria',
+    padding: '5px', // Reduced padding for smaller screens
+    transition: 'color 0.3s ease',
+    display: 'inline-block',
+  },
+  logo: {
+    width: '120px', // Adjusted width for better fit
+    height: 'auto',
+    marginBottom: '10px',
+  },
+};
 
-const Button = styled.button`
-  padding: 10px 20px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #555;
-  }
-`;
-
-export default Verification;
+export default Footer;
